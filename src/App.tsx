@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, Suspense, lazy } from 'react'
+import React, { useState, useEffect, Suspense, lazy } from 'react'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { WorksSection } from './components/WorksSection'
@@ -13,11 +13,12 @@ const AboutSection = lazy(() => import('./components/AboutSection').then(module 
 const WorkDetail = lazy(() => import('./components/WorkDetail').then(module => ({ default: module.WorkDetail })))
 const AdminLogin = lazy(() => import('./components/AdminLogin').then(module => ({ default: module.AdminLogin })))
 const AdminDashboard = lazy(() => import('./components/AdminDashboard').then(module => ({ default: module.AdminDashboard })))
+const NotFound = lazy(() => import('./components/NotFound').then(module => ({ default: module.NotFound })))
 
 const STORAGE_KEY = 'kraig_hamrick_portfolio_works'
 
 export default function App() {
-  const [currentView, setCurrentView] = useState<'home' | 'work' | 'about' | 'admin-login' | 'admin'>('home')
+  const [currentView, setCurrentView] = useState<'home' | 'work' | 'about' | 'admin-login' | 'admin' | '404'>('home')
   const [selectedWork, setSelectedWork] = useState<Work | null>(null)
   const [works, setWorks] = useState<Work[]>([])
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false)
@@ -78,6 +79,14 @@ export default function App() {
     }
   }
 
+  const handle404 = () => {
+    setCurrentView('404')
+  }
+
+  const handleBackFrom404 = () => {
+    setCurrentView('home')
+  }
+
   return (
     <div className="min-h-screen bg-black text-white">
       <PerformanceMonitor />
@@ -120,13 +129,19 @@ export default function App() {
             </Suspense>
           )}
           
-          {currentView === 'about' && (
-            <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
-              <AboutSection onBack={handleBackToHome} />
-            </Suspense>
-          )}
-          
-          <Footer />
+      {currentView === 'about' && (
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+          <AboutSection onBack={handleBackToHome} />
+        </Suspense>
+      )}
+      
+      {currentView === '404' && (
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+          <NotFound onBack={handleBackFrom404} />
+        </Suspense>
+      )}
+      
+      {currentView !== '404' && <Footer on404={handle404} />}
         </>
       )}
     </div>

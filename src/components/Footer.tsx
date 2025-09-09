@@ -1,6 +1,10 @@
 import React from 'react'
 
-export function Footer() {
+interface FooterProps {
+  on404?: () => void
+}
+
+export function Footer({ on404 }: FooterProps) {
   return (
     <footer className="border-t border-white/10 py-12 px-6">
       <div className="max-w-7xl mx-auto">
@@ -59,6 +63,14 @@ export function Footer() {
           <p className="transition-all duration-300 ease-out hover:text-white/70 hover:scale-105 cursor-default">
             Portfolio designed for visual excellence
           </p>
+          {on404 && (
+            <button 
+              onClick={on404}
+              className="mt-4 text-xs text-white/20 hover:text-white/40 transition-colors duration-300"
+            >
+              Test 404 Page
+            </button>
+          )}
         </div>
       </div>
     </footer>

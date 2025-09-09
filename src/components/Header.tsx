@@ -6,7 +6,7 @@ interface HeaderProps {
   onHomeClick: () => void
   onAboutClick: () => void
   onAdminClick?: () => void
-  currentView: 'home' | 'work' | 'about' | 'admin-login' | 'admin'
+  currentView: 'home' | 'work' | 'about' | 'admin-login' | 'admin' | '404'
 }
 
 export function Header({ onHomeClick, onAboutClick, onAdminClick, currentView }: HeaderProps) {
