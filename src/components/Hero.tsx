@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { siteConfig } from '../data/site-config'
+import { siteContent } from '../data/content'
 
 export function Hero() {
   const [videoError, setVideoError] = useState(false)
@@ -31,27 +32,27 @@ export function Hero() {
       <div className="text-center relative z-10 max-w-2xl mx-auto">
         <h1 className="text-6xl md:text-8xl mb-6 tracking-tight group">
           <span className="inline-block transition-all duration-500 ease-out hover:scale-105 hover:text-white/90 cursor-default">
-            Kraig Hamrick
+            {siteContent.hero.name}
           </span>
           <br />
           <span className="text-white/40 transition-all duration-500 ease-out hover:text-white/60 hover:scale-105 cursor-default inline-block">
-            creative portfolio
+            {siteContent.hero.subtitle}
           </span>
         </h1>
         
         <p className="text-xl md:text-2xl text-white/70 mb-8 leading-relaxed group">
           <span className="inline-block transition-all duration-500 ease-out hover:scale-105 hover:text-white/90 cursor-default">
-            Kraig Hamrick
+            {siteContent.hero.name}
           </span>
           <br />
           <span className="inline-block transition-all duration-500 ease-out hover:scale-105 hover:text-white/90 cursor-default">
-            UX/UI - Full Stack Server Admin
+            {siteContent.hero.title}
           </span>
         </p>
         
         <div className="flex items-center justify-center space-x-8 text-sm text-white/50">
           <div className="transition-all duration-300 ease-out hover:text-white/70 hover:scale-105 cursor-default">
-            Florida/Nevada
+            {siteContent.hero.location}
           </div>
         </div>
       </div>

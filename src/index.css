@@ -58,6 +58,10 @@
       transform: translateY(0);
     }
   }
+  
+  .hover\:scale-102:hover {
+    transform: scale(1.02);
+  }
 }
 
 @layer properties {

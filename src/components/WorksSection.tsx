@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useRef, useEffect, useState } from 'react'
 import { Work } from '../data/works'
 import { ImageWithFallback } from './figma/ImageWithFallback'
 
@@ -8,27 +8,106 @@ interface WorksSectionProps {
 }
 
 export function WorksSection({ works, onWorkClick }: WorksSectionProps) {
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
+  const [isUserScrolling, setIsUserScrolling] = useState(false)
+  const [autoScrollSpeed, setAutoScrollSpeed] = useState(0.5) // pixels per frame
+  const animationFrameRef = useRef<number>()
+
   const sortedWorks = useMemo(() => {
     console.log('WorksSection received works:', works.length, 'works')
     const sorted = [...works].sort((a, b) => a.year - b.year)
     console.log('Sorted works:', sorted.map(w => ({ title: w.title, thumbnail: w.thumbnail })))
     return sorted
   }, [works])
+
+  // Auto-scroll animation
+  const autoScroll = () => {
+    if (!scrollContainerRef.current || isUserScrolling) {
+      animationFrameRef.current = requestAnimationFrame(autoScroll)
+      return
+    }
+
+    const container = scrollContainerRef.current
+    const maxScroll = container.scrollWidth - container.clientWidth
+    
+    if (maxScroll <= 0) {
+      animationFrameRef.current = requestAnimationFrame(autoScroll)
+      return
+    }
+
+    // Reset to beginning when reaching the end
+    if (container.scrollLeft >= maxScroll) {
+      container.scrollLeft = 0
+    } else {
+      container.scrollLeft += autoScrollSpeed
+    }
+
+    animationFrameRef.current = requestAnimationFrame(autoScroll)
+  }
+
+  // Handle user scroll interaction
+  const handleUserScroll = () => {
+    setIsUserScrolling(true)
+    setAutoScrollSpeed(0) // Pause auto-scroll
+    
+    // Resume auto-scroll after user stops scrolling
+    setTimeout(() => {
+      setIsUserScrolling(false)
+      setAutoScrollSpeed(0.5) // Resume auto-scroll
+    }, 3000) // 3 seconds pause after user interaction
+  }
+
+  // Handle mouse enter/leave
+  const handleMouseEnter = () => {
+    setAutoScrollSpeed(0.2) // Slow down on hover
+  }
+
+  const handleMouseLeave = () => {
+    if (!isUserScrolling) {
+      setAutoScrollSpeed(0.5) // Resume normal speed
+    }
+  }
+
+  useEffect(() => {
+    // Start auto-scroll
+    animationFrameRef.current = requestAnimationFrame(autoScroll)
+
+    // Cleanup
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current)
+      }
+    }
+  }, [autoScrollSpeed, isUserScrolling])
   
   return (
     <section className="py-20 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="mb-12">
-          <h2 className="text-4xl md:text-5xl mb-6 transition-all duration-500 ease-out hover:scale-105 hover:text-white/90 cursor-default inline-block">
-            Selected Works
-          </h2>
+          <div className="flex items-center gap-3 mb-6">
+            <h2 className="text-4xl md:text-5xl transition-all duration-500 ease-out hover:scale-105 hover:text-white/90 cursor-default inline-block">
+              Selected Works
+            </h2>
+            {!isUserScrolling && (
+              <div className="flex items-center gap-1 text-white/40 text-sm">
+                <div className="w-2 h-2 bg-white/40 rounded-full animate-pulse"></div>
+                <span>Auto-scrolling</span>
+              </div>
+            )}
+          </div>
           <p className="text-white/60 text-lg max-w-2xl transition-all duration-300 ease-out hover:text-white/80 cursor-default">
           A curated collection of premium web experiences featuring cutting-edge design aesthetics, optimized user interaction patterns, and sophisticated interface flows that deliver both visual impact and effortless usability.
           </p>
         </div>
         
-        {/* Works grid - horizontal scroll */}
-        <div className="overflow-x-auto scrollbar-hide">
+        {/* Works grid - horizontal scroll with auto-scroll */}
+        <div 
+          ref={scrollContainerRef}
+          className="overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing"
+          onScroll={handleUserScroll}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
           <div className="flex space-x-8 pb-4" style={{ width: 'max-content' }}>
             {sortedWorks.map((work) => (
               <div

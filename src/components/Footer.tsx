@@ -23,13 +23,13 @@ export function Footer({ on404 }: FooterProps) {
               Contact
             </h4>
             <div className="space-y-2 text-white/70">
-              <p className="transition-all duration-300 ease-out hover:text-white hover:scale-105 cursor-pointer">
+              <p className="transition-all duration-300 ease-out hover:text-white hover:scale-102 cursor-pointer">
                 Kraighamrick@gmail.com
               </p>
-              <p className="transition-all duration-300 ease-out hover:text-white hover:scale-105 cursor-pointer">
+              <p className="transition-all duration-300 ease-out hover:text-white hover:scale-102 cursor-pointer">
                 702-637-6227
               </p>
-              <p className="transition-all duration-300 ease-out hover:text-white hover:scale-105 cursor-pointer">
+              <p className="transition-all duration-300 ease-out hover:text-white hover:scale-102 cursor-pointer">
                 Florida/Nevada
               </p>
             </div>
@@ -40,15 +40,15 @@ export function Footer({ on404 }: FooterProps) {
               Connect
             </h4>
             <div className="flex space-x-6">
-              <a href="#" className="text-white/60 hover:text-white transition-all duration-300 ease-out hover:scale-105 relative group">
+              <a href="#" className="text-white/60 hover:text-white transition-all duration-300 ease-out hover:scale-102 relative group">
                 <span className="relative z-10">Instagram</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-pink-500/20 to-purple-500/20 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </a>
-              <a href="#" className="text-white/60 hover:text-white transition-all duration-300 ease-out hover:scale-105 relative group">
+              <a href="#" className="text-white/60 hover:text-white transition-all duration-300 ease-out hover:scale-102 relative group">
                 <span className="relative z-10">Vimeo</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </a>
-              <a href="#" className="text-white/60 hover:text-white transition-all duration-300 ease-out hover:scale-105 relative group">
+              <a href="#" className="text-white/60 hover:text-white transition-all duration-300 ease-out hover:scale-102 relative group">
                 <span className="relative z-10">Twitter</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-sky-500/20 to-blue-500/20 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </a>
