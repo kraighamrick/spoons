@@ -1,0 +1,5 @@
+# Default commit message template for numerical commits
+# This file will be used as the default commit message template
+# To use: git config commit.template .gitmessage
+
+# Next commit number: (auto-generated)
