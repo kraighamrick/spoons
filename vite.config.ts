@@ -59,6 +59,7 @@
             vendor: ['react', 'react-dom'],
             ui: ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-select'],
           },
+          
         },
       },
       minify: 'terser',

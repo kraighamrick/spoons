@@ -96,7 +96,7 @@ export const works: Work[] = [
     year: 2023,
     client: 'Pinehurst Resort & Country Club',
     duration: 'Website',
-    thumbnail: 'https://cdn-ilbbpdb.nitrocdn.com/ZPvHxDAnfjiOCTRKZzZlFwdZrjJUwSbC/assets/images/optimized/rev-c29b4b2/www.pinehurst.com/wp-content/uploads/2022/11/Golf_Course_No4.jpg',
+    thumbnail: 'https://i.imgur.com/3bXiQ9a.jpeg',
     projectUrl: 'https://example.com/pinehurst',
     description: 'A comprehensive resort website showcasing nine championship golf courses. Features elegant design, detailed course information, accommodation options, and seamless reservation systems for the ultimate golf destination.',
     credits: {

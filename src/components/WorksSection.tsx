@@ -75,7 +75,14 @@ export function WorksSection({ works, onWorkClick }: WorksSectionProps) {
             {duplicatedWorks.map((work, index) => (
               <div
                 key={`${work.id}-${index}`}
-                className="group flex-shrink-0 transition-all duration-500 ease-out hover:scale-105"
+                className={`group flex-shrink-0 transition-all duration-500 ease-out hover:scale-105 ${
+                  work.projectUrl && work.projectUrl !== '#' ? 'cursor-pointer' : 'cursor-default'
+                }`}
+                onClick={() => {
+                  if (work.projectUrl && work.projectUrl !== '#') {
+                    onWorkClick(work)
+                  }
+                }}
               >
                 <div className="relative w-96 h-56 bg-gray-900 rounded-lg overflow-hidden mb-4 transition-all duration-500 ease-out group-hover:shadow-2xl group-hover:shadow-white/10">
                   <ImageWithFallback
