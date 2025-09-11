@@ -10,6 +10,7 @@ import { works as initialWorks, Work } from './data/works'
 
 // Lazy load components for better performance
 const AboutSection = lazy(() => import('./components/AboutSection').then(module => ({ default: module.AboutSection })))
+const WorksPage = lazy(() => import('./components/WorksPage').then(module => ({ default: module.WorksPage })))
 const WorkDetail = lazy(() => import('./components/WorkDetail').then(module => ({ default: module.WorkDetail })))
 const AdminLogin = lazy(() => import('./components/AdminLogin').then(module => ({ default: module.AdminLogin })))
 const AdminDashboard = lazy(() => import('./components/AdminDashboard').then(module => ({ default: module.AdminDashboard })))
@@ -18,7 +19,7 @@ const NotFound = lazy(() => import('./components/NotFound').then(module => ({ de
 const STORAGE_KEY = 'kraig_hamrick_portfolio_works'
 
 export default function App() {
-  const [currentView, setCurrentView] = useState<'home' | 'work' | 'about' | 'admin-login' | 'admin' | '404'>('home')
+  const [currentView, setCurrentView] = useState<'home' | 'works' | 'work' | 'about' | 'admin-login' | 'admin' | '404'>('home')
   const [selectedWork, setSelectedWork] = useState<Work | null>(null)
   const [works, setWorks] = useState<Work[]>([])
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false)
@@ -45,6 +46,10 @@ export default function App() {
   const handleBackToHome = () => {
     setCurrentView('home')
     setSelectedWork(null)
+  }
+
+  const handleWorksClick = () => {
+    setCurrentView('works')
   }
 
   const handleAboutClick = () => {
@@ -111,6 +116,7 @@ export default function App() {
         <>
           <Header 
             onHomeClick={handleBackToHome}
+            onWorksClick={handleWorksClick}
             onAboutClick={handleAboutClick}
             onAdminClick={handleAdminClick}
             currentView={currentView}
@@ -121,6 +127,12 @@ export default function App() {
               <Hero />
               <WorksSection works={works} onWorkClick={handleWorkClick} />
             </>
+          )}
+          
+          {currentView === 'works' && (
+            <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+              <WorksPage onBack={handleBackToHome} />
+            </Suspense>
           )}
           
           {currentView === 'work' && selectedWork && (

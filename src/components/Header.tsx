@@ -1,15 +1,15 @@
 import React from 'react'
 import { Button } from './ui/button'
-import { KHLogo } from './KHLogo'
 
 interface HeaderProps {
   onHomeClick: () => void
+  onWorksClick: () => void
   onAboutClick: () => void
   onAdminClick?: () => void
-  currentView: 'home' | 'work' | 'about' | 'admin-login' | 'admin' | '404'
+  currentView: 'home' | 'works' | 'work' | 'about' | 'admin-login' | 'admin' | '404'
 }
 
-export function Header({ onHomeClick, onAboutClick, onAdminClick, currentView }: HeaderProps) {
+export function Header({ onHomeClick, onWorksClick, onAboutClick, onAdminClick, currentView }: HeaderProps) {
   let clickCount = 0
   let clickTimer: NodeJS.Timeout | null = null
 
@@ -48,9 +48,9 @@ export function Header({ onHomeClick, onAboutClick, onAdminClick, currentView }:
           <div className="flex items-center space-x-8">
             <Button
               variant="ghost"
-              onClick={onHomeClick}
-              className={`text-white hover:text-white/70 hover:bg-white/5 hover:scale-105 hover:shadow-lg hover:shadow-white/10 active:scale-95 relative overflow-hidden group before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-700 before:ease-out ${
-                currentView === 'home' ? 'text-white' : 'text-white/60'
+              onClick={onWorksClick}
+              className={`text-base text-white hover:text-white/70 hover:bg-white/5 hover:scale-105 hover:shadow-lg hover:shadow-white/10 active:scale-95 relative overflow-hidden group before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-700 before:ease-out ${
+                currentView === 'works' ? 'text-white' : 'text-white/60'
               }`}
             >
               <span className="relative z-10">Works</span>
@@ -58,15 +58,12 @@ export function Header({ onHomeClick, onAboutClick, onAdminClick, currentView }:
             <Button
               variant="ghost"
               onClick={onAboutClick}
-              className={`text-white hover:text-white/70 hover:bg-white/5 hover:scale-105 hover:shadow-lg hover:shadow-white/10 active:scale-95 relative overflow-hidden group before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-700 before:ease-out ${
+              className={`text-base text-white hover:text-white/70 hover:bg-white/5 hover:scale-105 hover:shadow-lg hover:shadow-white/10 active:scale-95 relative overflow-hidden group before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-700 before:ease-out ${
                 currentView === 'about' ? 'text-white' : 'text-white/60'
               }`}
             >
               <span className="relative z-10">About</span>
             </Button>
-            
-            {/* KH Logo in top right */}
-            <KHLogo size="sm" className="ml-4" />
           </div>
         </nav>
       </div>

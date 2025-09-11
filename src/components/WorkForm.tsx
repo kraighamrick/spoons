@@ -5,25 +5,7 @@ import { Textarea } from './ui/textarea'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 import { ImageSelector } from './ImageSelector'
-// Video/Film Work interface for admin panel
-interface Work {
-  id: string
-  title: string
-  category: 'MV' | 'Commercial' | 'Short Film' | 'Documentary'
-  year: number
-  client?: string
-  artist?: string
-  duration: string
-  thumbnail: string
-  videoUrl: string
-  description: string
-  credits: {
-    director: string
-    editor: string
-    cinematographer?: string
-    producer?: string
-  }
-}
+import { Work } from '../data/works'
 
 interface WorkFormProps {
   work?: Work
@@ -34,19 +16,18 @@ interface WorkFormProps {
 export function WorkForm({ work, onSave, onCancel }: WorkFormProps) {
   const [formData, setFormData] = useState({
     title: '',
-    category: 'MV' as Work['category'],
+    category: 'Web Development' as Work['category'],
     year: new Date().getFullYear(),
     client: '',
-    artist: '',
     duration: '',
     thumbnail: '',
-    videoUrl: '',
+    projectUrl: '',
     description: '',
     credits: {
-      director: 'Kraig Hamrick',
-      editor: 'Kraig Hamrick',
-      cinematographer: '',
-      producer: ''
+      developer: 'Kraig Hamrick',
+      designer: '',
+      photographer: '',
+      agency: ''
     }
   })
 
@@ -57,16 +38,15 @@ export function WorkForm({ work, onSave, onCancel }: WorkFormProps) {
         category: work.category,
         year: work.year,
         client: work.client || '',
-        artist: work.artist || '',
         duration: work.duration,
         thumbnail: work.thumbnail,
-        videoUrl: work.videoUrl,
+        projectUrl: work.projectUrl,
         description: work.description,
         credits: {
-          director: work.credits.director,
-          editor: work.credits.editor,
-          cinematographer: work.credits.cinematographer || '',
-          producer: work.credits.producer || ''
+          developer: work.credits.developer,
+          designer: work.credits.designer || '',
+          photographer: work.credits.photographer || '',
+          agency: work.credits.agency || ''
         }
       })
     }
@@ -84,13 +64,12 @@ export function WorkForm({ work, onSave, onCancel }: WorkFormProps) {
     const workData = {
       ...formData,
       credits: {
-        director: formData.credits.director,
-        editor: formData.credits.editor,
-        ...(formData.credits.cinematographer && { cinematographer: formData.credits.cinematographer }),
-        ...(formData.credits.producer && { producer: formData.credits.producer })
+        developer: formData.credits.developer,
+        ...(formData.credits.designer && { designer: formData.credits.designer }),
+        ...(formData.credits.photographer && { photographer: formData.credits.photographer }),
+        ...(formData.credits.agency && { agency: formData.credits.agency })
       },
-      ...(formData.client && { client: formData.client }),
-      ...(formData.artist && { artist: formData.artist })
+      ...(formData.client && { client: formData.client })
     }
 
     if (work) {
@@ -155,10 +134,10 @@ export function WorkForm({ work, onSave, onCancel }: WorkFormProps) {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent className="bg-gray-800 border-gray-700">
-                    <SelectItem value="MV">MV (Music Video)</SelectItem>
-                    <SelectItem value="Commercial">Commercial</SelectItem>
-                    <SelectItem value="Short Film">Short Film</SelectItem>
-                    <SelectItem value="Documentary">Documentary</SelectItem>
+                    <SelectItem value="Web Development">Web Development</SelectItem>
+                    <SelectItem value="E-commerce">E-commerce</SelectItem>
+                    <SelectItem value="Corporate">Corporate</SelectItem>
+                    <SelectItem value="Portfolio">Portfolio</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -195,44 +174,18 @@ export function WorkForm({ work, onSave, onCancel }: WorkFormProps) {
             </div>
 
             {/* Category-specific fields */}
-            {formData.category === 'MV' && (
-              <div>
-                <label className="block text-sm text-gray-300 mb-2">
-                  Artist Name
-                </label>
-                <Input
-                  value={formData.artist}
-                  onChange={(e) => updateField('artist', e.target.value)}
-                  placeholder="e.g., Luna Sky"
-                  className="bg-gray-800 border-gray-700 text-white"
-                />
-              </div>
-            )}
 
-            {formData.category === 'Commercial' && (
-              <div>
-                <label className="block text-sm text-gray-300 mb-2">
-                  Client Name
-                </label>
-                <Input
-                  value={formData.client}
-                  onChange={(e) => updateField('client', e.target.value)}
-                  placeholder="e.g., Nike"
-                  className="bg-gray-800 border-gray-700 text-white"
-                />
-              </div>
-            )}
 
-            {/* Video URL */}
+            {/* Project URL */}
             <div>
               <label className="block text-sm text-gray-300 mb-2">
-                Video URL *
+                Project URL *
               </label>
               <Input
                 type="url"
-                value={formData.videoUrl}
-                onChange={(e) => updateField('videoUrl', e.target.value)}
-                placeholder="https://youtube.com/watch?v=... or https://vimeo.com/..."
+                value={formData.projectUrl}
+                onChange={(e) => updateField('projectUrl', e.target.value)}
+                placeholder="https://example.com"
                 required
                 className="bg-gray-800 border-gray-700 text-white"
               />
@@ -265,11 +218,11 @@ export function WorkForm({ work, onSave, onCancel }: WorkFormProps) {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm text-gray-300 mb-2">
-                    Director *
+                    Developer *
                   </label>
                   <Input
-                    value={formData.credits.director}
-                    onChange={(e) => updateField('credits.director', e.target.value)}
+                    value={formData.credits.developer}
+                    onChange={(e) => updateField('credits.developer', e.target.value)}
                     required
                     className="bg-gray-800 border-gray-700 text-white"
                   />
@@ -277,23 +230,11 @@ export function WorkForm({ work, onSave, onCancel }: WorkFormProps) {
 
                 <div>
                   <label className="block text-sm text-gray-300 mb-2">
-                    Editor *
+                    Designer
                   </label>
                   <Input
-                    value={formData.credits.editor}
-                    onChange={(e) => updateField('credits.editor', e.target.value)}
-                    required
-                    className="bg-gray-800 border-gray-700 text-white"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm text-gray-300 mb-2">
-                    Cinematographer
-                  </label>
-                  <Input
-                    value={formData.credits.cinematographer}
-                    onChange={(e) => updateField('credits.cinematographer', e.target.value)}
+                    value={formData.credits.designer}
+                    onChange={(e) => updateField('credits.designer', e.target.value)}
                     placeholder="Optional"
                     className="bg-gray-800 border-gray-700 text-white"
                   />
@@ -301,11 +242,23 @@ export function WorkForm({ work, onSave, onCancel }: WorkFormProps) {
 
                 <div>
                   <label className="block text-sm text-gray-300 mb-2">
-                    Producer
+                    Photographer
                   </label>
                   <Input
-                    value={formData.credits.producer}
-                    onChange={(e) => updateField('credits.producer', e.target.value)}
+                    value={formData.credits.photographer}
+                    onChange={(e) => updateField('credits.photographer', e.target.value)}
+                    placeholder="Optional"
+                    className="bg-gray-800 border-gray-700 text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm text-gray-300 mb-2">
+                    Agency
+                  </label>
+                  <Input
+                    value={formData.credits.agency}
+                    onChange={(e) => updateField('credits.agency', e.target.value)}
                     placeholder="Optional"
                     className="bg-gray-800 border-gray-700 text-white"
                   />

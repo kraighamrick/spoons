@@ -5409,3 +5409,12 @@ html {
 .animate-carousel {
   animation: carousel var(--animation-duration, 20s) linear infinite;
 }
+
+@keyframes flowLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

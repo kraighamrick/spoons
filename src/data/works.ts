@@ -106,17 +106,17 @@ export const works: Work[] = [
   },
   {
     id: '6',
-    title: 'Whistling Straits',
+    title: 'Fairway Atlas',
     category: 'Web Development',
-    year: 2023,
-    client: 'Kohler Co.',
-    duration: 'Website',
-    thumbnail: 'https://images.unsplash.com/photo-1492315622343-a50efe7c40a3?q=80&w=800&h=600&fit=crop',
-    projectUrl: 'https://example.com/whistling-straits',
-    description: 'A dramatic website showcasing the rugged beauty of Whistling Straits. Features stunning photography of the Irish-style links course, tournament history, and luxury accommodation options with modern booking functionality.',
+    year: 2024,
+    client: 'Golf Community',
+    duration: 'Platform',
+    thumbnail: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=800&h=600&fit=crop',
+    projectUrl: 'https://preview-real-estate-home-page-kzmjztzq5q0bqbi1ieem.vusercontent.net/',
+    description: 'A comprehensive golf course discovery and mapping platform. Features interactive course directories, detailed course information, user reviews, and advanced search functionality for golf enthusiasts worldwide.',
     credits: {
       developer: 'Kraig Hamrick',
-      agency: 'Kohler Digital'
+      designer: 'Kraig Hamrick'
     }
   },
   {

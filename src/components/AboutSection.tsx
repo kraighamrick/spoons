@@ -66,18 +66,10 @@ export function AboutSection({ onBack }: AboutSectionProps) {
                 
                 <div>
                   <div className="flex justify-between items-center mb-1">
-                    <span className="text-white">Server Administrator</span>
-                    <span className="text-sm">2019 - 2021</span>
-                  </div>
-                  <p className="text-sm">Cloud Infrastructure & DevOps</p>
-                </div>
-                
-                <div>
-                  <div className="flex justify-between items-center mb-1">
                     <span className="text-white">Freelance Developer</span>
-                    <span className="text-sm">2017 - 2018</span>
+                    <span className="text-sm">2017 - 2021</span>
                   </div>
-                  <p className="text-sm">Web Development & Server Setup</p>
+                  <p className="text-sm">Web Development, Server Setup & Cloud Infrastructure</p>
                 </div>
                 
                 <div>
@@ -116,7 +108,7 @@ export function AboutSection({ onBack }: AboutSectionProps) {
               Server Management & Infrastructure
             </h3>
             <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-white/5 rounded-lg p-6 border border-white/10 transition-all duration-300 ease-out hover:bg-white/10 hover:scale-105 hover:shadow-lg hover:shadow-white/10 group cursor-default">
+              <div className="bg-white/5 rounded-lg p-6 border border-gray-500/30 transition-all duration-300 ease-out hover:bg-white/10 hover:scale-105 hover:shadow-lg hover:shadow-white/10 group cursor-default">
                 <h4 className="text-lg mb-4 text-white transition-all duration-300 ease-out group-hover:text-white/90">Cloud Infrastructure</h4>
                 <ul className="space-y-2 text-white/70 text-sm">
                   <li className="transition-all duration-300 ease-out group-hover:text-white/80">• AWS EC2, S3, RDS, and CloudFront management</li>
@@ -126,7 +118,7 @@ export function AboutSection({ onBack }: AboutSectionProps) {
                 </ul>
               </div>
               
-              <div className="bg-white/5 rounded-lg p-6 border border-white/10 transition-all duration-300 ease-out hover:bg-white/10 hover:scale-105 hover:shadow-lg hover:shadow-white/10 group cursor-default">
+              <div className="bg-white/5 rounded-lg p-6 border border-gray-500/30 transition-all duration-300 ease-out hover:bg-white/10 hover:scale-105 hover:shadow-lg hover:shadow-white/10 group cursor-default">
                 <h4 className="text-lg mb-4 text-white transition-all duration-300 ease-out group-hover:text-white/90">Database & Performance</h4>
                 <ul className="space-y-2 text-white/70 text-sm">
                   <li className="transition-all duration-300 ease-out group-hover:text-white/80">• PostgreSQL and MongoDB administration</li>
@@ -136,7 +128,7 @@ export function AboutSection({ onBack }: AboutSectionProps) {
                 </ul>
               </div>
               
-              <div className="bg-white/5 rounded-lg p-6 border border-white/10 transition-all duration-300 ease-out hover:bg-white/10 hover:scale-105 hover:shadow-lg hover:shadow-white/10 group cursor-default">
+              <div className="bg-white/5 rounded-lg p-6 border border-gray-500/30 transition-all duration-300 ease-out hover:bg-white/10 hover:scale-105 hover:shadow-lg hover:shadow-white/10 group cursor-default">
                 <h4 className="text-lg mb-4 text-white transition-all duration-300 ease-out group-hover:text-white/90">DevOps & Automation</h4>
                 <ul className="space-y-2 text-white/70 text-sm">
                   <li className="transition-all duration-300 ease-out group-hover:text-white/80">• CI/CD pipeline setup and maintenance</li>
@@ -146,7 +138,7 @@ export function AboutSection({ onBack }: AboutSectionProps) {
                 </ul>
               </div>
               
-              <div className="bg-white/5 rounded-lg p-6 border border-white/10 transition-all duration-300 ease-out hover:bg-white/10 hover:scale-105 hover:shadow-lg hover:shadow-white/10 group cursor-default">
+              <div className="bg-white/5 rounded-lg p-6 border border-gray-500/30 transition-all duration-300 ease-out hover:bg-white/10 hover:scale-105 hover:shadow-lg hover:shadow-white/10 group cursor-default">
                 <h4 className="text-lg mb-4 text-white transition-all duration-300 ease-out group-hover:text-white/90">High Availability</h4>
                 <ul className="space-y-2 text-white/70 text-sm">
                   <li className="transition-all duration-300 ease-out group-hover:text-white/80">• Multi-server deployment strategies</li>

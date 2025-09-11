@@ -5,25 +5,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { Badge } from './ui/badge'
 import { WorkForm } from './WorkForm'
 import { ImageWithFallback } from './figma/ImageWithFallback'
-// Video/Film Work interface for admin panel
-interface Work {
-  id: string
-  title: string
-  category: 'MV' | 'Commercial' | 'Short Film' | 'Documentary'
-  year: number
-  client?: string
-  artist?: string
-  duration: string
-  thumbnail: string
-  videoUrl: string
-  description: string
-  credits: {
-    director: string
-    editor: string
-    cinematographer?: string
-    producer?: string
-  }
-}
+import { Work } from '../data/works'
 import { Pencil, Trash2, Plus, Home } from 'lucide-react'
 
 interface AdminDashboardProps {
@@ -38,24 +20,24 @@ export function AdminDashboard({ works, onWorksUpdate, onLogout, onBackToSite }:
   const [editingWork, setEditingWork] = useState<Work | null>(null)
   
   // Convert web development works to video works format or use empty array
-  const videoWorks: Work[] = []
+  const webWorks: Work[] = works
 
   const handleAddWork = (workData: Omit<Work, 'id'>) => {
-    const newId = (Math.max(...videoWorks.map(w => parseInt(w.id)), 0) + 1).toString()
+    const newId = (Math.max(...webWorks.map(w => parseInt(w.id)), 0) + 1).toString()
     const newWork: Work = { ...workData, id: newId }
-    onWorksUpdate([...videoWorks, newWork])
+    onWorksUpdate([...webWorks, newWork])
     setCurrentView('list')
   }
 
   const handleEditWork = (workData: Work) => {
-    const updatedWorks = videoWorks.map(w => w.id === workData.id ? workData : w)
+    const updatedWorks = webWorks.map(w => w.id === workData.id ? workData : w)
     onWorksUpdate(updatedWorks)
     setCurrentView('list')
     setEditingWork(null)
   }
 
   const handleDeleteWork = (workId: string) => {
-    const updatedWorks = videoWorks.filter(w => w.id !== workId)
+    const updatedWorks = webWorks.filter(w => w.id !== workId)
     onWorksUpdate(updatedWorks)
   }
 
@@ -66,10 +48,10 @@ export function AdminDashboard({ works, onWorksUpdate, onLogout, onBackToSite }:
 
   const getCategoryBadgeColor = (category: Work['category']) => {
     switch (category) {
-      case 'MV': return 'bg-purple-600'
-      case 'Commercial': return 'bg-blue-600'
-      case 'Short Film': return 'bg-green-600'
-      case 'Documentary': return 'bg-orange-600'
+      case 'Web Development': return 'bg-blue-600'
+      case 'E-commerce': return 'bg-green-600'
+      case 'Corporate': return 'bg-purple-600'
+      case 'Portfolio': return 'bg-orange-600'
       default: return 'bg-gray-600'
     }
   }
@@ -130,18 +112,18 @@ export function AdminDashboard({ works, onWorksUpdate, onLogout, onBackToSite }:
               <CardTitle className="text-sm text-gray-400">Total Works</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl text-white">{videoWorks.length}</div>
+              <div className="text-2xl text-white">{webWorks.length}</div>
             </CardContent>
           </Card>
 
-          {(['MV', 'Commercial', 'Short Film', 'Documentary'] as const).map(category => (
+          {(['Web Development', 'E-commerce', 'Corporate', 'Portfolio'] as const).map(category => (
             <Card key={category} className="bg-gray-900 border-gray-800">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm text-gray-400">{category}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl text-white">
-                  {videoWorks.filter(w => w.category === category).length}
+                  {webWorks.filter(w => w.category === category).length}
                 </div>
               </CardContent>
             </Card>
@@ -162,7 +144,7 @@ export function AdminDashboard({ works, onWorksUpdate, onLogout, onBackToSite }:
 
         {/* Works List */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {videoWorks.map((work) => (
+          {webWorks.map((work) => (
             <Card key={work.id} className="bg-gray-900 border-gray-800 overflow-hidden">
               <div className="aspect-video relative">
                 <ImageWithFallback
@@ -184,7 +166,6 @@ export function AdminDashboard({ works, onWorksUpdate, onLogout, onBackToSite }:
                 </div>
                 
                 <div className="text-sm text-gray-400 mb-3">
-                  {work.artist && <span>Artist: {work.artist}</span>}
                   {work.client && <span>Client: {work.client}</span>}
                   <div>Duration: {work.duration}</div>
                 </div>
@@ -245,7 +226,7 @@ export function AdminDashboard({ works, onWorksUpdate, onLogout, onBackToSite }:
           ))}
         </div>
 
-        {videoWorks.length === 0 && (
+        {webWorks.length === 0 && (
           <div className="text-center py-12">
             <h3 className="text-xl text-gray-400 mb-4">No works yet</h3>
             <p className="text-gray-500 mb-6">Add your first work to get started</p>
