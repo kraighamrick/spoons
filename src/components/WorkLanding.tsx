@@ -26,30 +26,48 @@ export function WorkLanding({ work, onBack, onVisitSite }: WorkLandingProps) {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Project Image */}
           <div className="relative">
-            <div className="relative w-full h-96 lg:h-[500px] bg-gray-900 rounded-2xl overflow-hidden shadow-2xl">
-              <ImageWithFallback
-                src={work.thumbnail}
-                alt={work.title}
-                className="w-full h-full object-cover"
-              />
-              
-              {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-              
-              {/* Category badge */}
-              <div className="absolute top-6 left-6">
-                <span className="px-4 py-2 bg-black/70 backdrop-blur-sm rounded-full text-sm tracking-wide">
-                  {work.category}
-                </span>
+            <a 
+              href={work.projectUrl} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block cursor-pointer group transition-transform hover:scale-105"
+            >
+              <div className="relative w-full h-96 lg:h-[500px] bg-gray-900 rounded-2xl overflow-hidden shadow-2xl">
+                <ImageWithFallback
+                  src={work.thumbnail}
+                  alt={work.title}
+                  className="w-full h-full object-cover"
+                />
+                
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                
+                {/* Category badge */}
+                <div className="absolute top-6 left-6">
+                  <span className="px-4 py-2 bg-black/70 backdrop-blur-sm rounded-full text-sm tracking-wide">
+                    {work.category}
+                  </span>
+                </div>
+                
+                {/* Duration badge */}
+                <div className="absolute top-6 right-6">
+                  <span className="px-3 py-2 bg-black/70 backdrop-blur-sm rounded text-sm">
+                    {work.duration}
+                  </span>
+                </div>
+                
+                {/* Click overlay for LinksDAO */}
+                {work.id === '1' && (
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 rounded-full p-3">
+                      <svg className="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                  </div>
+                )}
               </div>
-              
-              {/* Duration badge */}
-              <div className="absolute top-6 right-6">
-                <span className="px-3 py-2 bg-black/70 backdrop-blur-sm rounded text-sm">
-                  {work.duration}
-                </span>
-              </div>
-            </div>
+            </a>
           </div>
           
           {/* Project Details */}
@@ -108,24 +126,26 @@ export function WorkLanding({ work, onBack, onVisitSite }: WorkLandingProps) {
               {work.projectUrl && work.projectUrl !== '#' && (
                 <Button
                   onClick={onVisitSite}
-                  className="flex items-center space-x-2 bg-gradient-to-r from-white via-gray-100 to-white text-black hover:from-gray-100 hover:via-white hover:to-gray-100 px-6 py-2.5 text-base font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white/20 border border-white/20"
+                  className="flex items-center space-x-1 bg-gradient-to-r from-white via-gray-100 to-white text-black hover:from-gray-100 hover:via-white hover:to-gray-100 px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white/20 border border-white/20 w-auto"
                 >
-                  <ExternalLink className="w-4 h-4" />
+                  <ExternalLink className="w-3 h-3" />
                   <span>Visit Website</span>
                 </Button>
               )}
-              
-              <Button
-                variant="outline"
-                onClick={onBack}
-                className="border-white/20 text-white hover:bg-white/10 hover:border-white/40 px-6 py-2.5 text-base font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white/10 group"
-              >
-                <span className="group-hover:translate-x-1 transition-transform duration-300">View More Works</span>
-                <ArrowLeft className="w-4 h-4 ml-2 group-hover:-translate-x-1 transition-transform duration-300" />
-              </Button>
             </div>
           </div>
         </div>
+      </div>
+      
+      {/* Floating Home Button */}
+      <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
+        <a 
+          href="/"
+          className="inline-flex items-center justify-center bg-white text-black hover:bg-gray-100 px-4 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-white/20 group rounded-full border border-white/20 min-w-0"
+        >
+          <span className="text-center group-hover:translate-x-1 transition-transform duration-300">Home</span>
+          <ArrowLeft className="w-3 h-3 ml-1 group-hover:-translate-x-1 transition-transform duration-300" />
+        </a>
       </div>
     </div>
   )

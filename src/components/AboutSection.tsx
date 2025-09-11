@@ -59,7 +59,7 @@ export function AboutSection({ onBack }: AboutSectionProps) {
                 <div>
                   <div className="flex justify-between items-center mb-1">
                     <span className="text-white">Full-Stack Developer & Server Admin</span>
-                    <span className="text-sm">2021 - Present</span>
+                    <span className="text-sm">2022 - 2023</span>
                   </div>
                   <p className="text-sm">LinksDAO & Independent Projects</p>
                 </div>

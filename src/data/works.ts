@@ -31,7 +31,7 @@ export const works: Work[] = [
     id: '1',
     title: 'Linksdao.io',
     category: 'Web Development',
-    year: 2021,
+    year: 2022,
     client: 'LinksDAO',
     duration: 'Website',
     thumbnail: 'https://www.linksdao.io/opengraph-image.png?141bc99611faeb22',

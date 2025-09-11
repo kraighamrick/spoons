@@ -10,8 +10,15 @@ interface WorkDetailProps {
 }
 
 export function WorkDetail({ work, onBack }: WorkDetailProps) {
-  const handleThumbnailClick = () => {
-    window.open(work.projectUrl, '_blank')
+  const handleThumbnailClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    console.log('Thumbnail clicked, opening URL:', work.projectUrl)
+    if (work.projectUrl && work.projectUrl !== '#') {
+      window.open(work.projectUrl, '_blank')
+    } else {
+      console.log('No valid project URL found')
+    }
   }
 
   return (
@@ -20,9 +27,9 @@ export function WorkDetail({ work, onBack }: WorkDetailProps) {
         <Button
           variant="ghost"
           onClick={onBack}
-          className="mb-8 text-white/60 hover:text-white hover:bg-white/5 p-0 hover:scale-105 hover:shadow-lg hover:shadow-white/10 active:scale-95 relative overflow-hidden group before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-700 before:ease-out"
+          className="mb-8 text-white/60 hover:text-white hover:bg-white/5 px-3 py-2 text-sm hover:scale-105 hover:shadow-lg hover:shadow-white/10 active:scale-95 relative overflow-hidden group before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-700 before:ease-out"
         >
-          <ArrowLeft className="w-4 h-4 mr-2 relative z-10" />
+          <ArrowLeft className="w-3 h-3 mr-1 relative z-10" />
           <span className="relative z-10">Back to Works</span>
         </Button>
         
@@ -39,9 +46,11 @@ export function WorkDetail({ work, onBack }: WorkDetailProps) {
               
               <h1 className="text-5xl md:text-6xl mb-8">{work.title}</h1>
               
-              <p className="text-lg text-white/80 leading-relaxed mb-8">
-                {work.description}
-              </p>
+              <div className="bg-white text-black p-6 rounded-lg mb-8">
+                <p className="text-lg leading-relaxed">
+                  {work.description}
+                </p>
+              </div>
             </div>
             
             <div className="relative">
@@ -64,7 +73,7 @@ export function WorkDetail({ work, onBack }: WorkDetailProps) {
               </div>
               
               <p className="text-center text-sm text-white/60 mt-4">
-                Click to view project
+                Click to visit website
               </p>
             </div>
           </div>
