@@ -31,12 +31,12 @@ export const works: Work[] = [
     id: '1',
     title: 'Linksdao.io',
     category: 'Web Development',
-    year: 2022,
+    year: 2021,
     client: 'LinksDAO',
     duration: 'Website',
     thumbnail: 'https://www.linksdao.io/opengraph-image.png?141bc99611faeb22',
     projectUrl: 'https://linksdao.io',
-    description: 'A cutting-edge Web3 platform for golf enthusiasts and NFT collectors. Features modern blockchain integration, community-driven governance, and immersive digital experiences that bridge traditional golf culture with decentralized technology. Helped develop their tokenizing platform, running a token through Solana blockchain for enhanced performance and scalability.',
+    description: 'A cutting-edge Web3 platform for golf enthusiasts and NFT collectors. Features modern blockchain integration, community-driven governance, and immersive digital experiences that bridge traditional golf culture with decentralized technology.',
     credits: {
       developer: 'Kraig Hamrick',
       designer: 'Web3 Design Studio',
@@ -44,18 +44,19 @@ export const works: Work[] = [
     }
   },
   {
-    id: '6',
-    title: 'Fairway Atlas',
+    id: '2',
+    title: 'Pebble Beach Golf Club',
     category: 'Web Development',
     year: 2024,
-    client: 'Golf Community',
-    duration: 'Platform',
-    thumbnail: 'https://i.imgur.com/LFhGteA.png',
-    projectUrl: 'https://preview-real-estate-home-page-kzmjztzq5q0bqbi1ieem.vusercontent.net/',
-    description: 'A comprehensive golf course discovery and mapping platform. Features interactive course directories, detailed course information, user reviews, and advanced search functionality for golf enthusiasts worldwide.',
+    client: 'Pebble Beach Resorts',
+    duration: 'Website',
+    thumbnail: 'https://images.ctfassets.net/56u5qdsjym8c/6r21Rq3lVV057ySsVC2rjb/465257c0a91d9384c1b4bc4ca2779387/Pebble_Beach_Difficult_Courses_4x5.jpg',
+    projectUrl: 'https://example.com/pebble-beach',
+    description: 'A premium golf course website featuring stunning aerial photography, interactive course maps, and seamless booking integration. Designed to capture the elegance and prestige of one of America\'s most iconic golf destinations.',
     credits: {
       developer: 'Kraig Hamrick',
-      designer: 'Kraig Hamrick'
+      photographer: 'Aerial Photography Team',
+      agency: 'Digital Golf Solutions'
     }
   },
   {
@@ -87,34 +88,69 @@ export const works: Work[] = [
       developer: 'Kraig Hamrick',
       photographer: 'Scottish Heritage Media'
     }
-  }
-
-  /*
-  // To add new web development projects, use the following template:
-  
+  },
   {
-    id: '8',                     // Next number
-    title: 'Project Name',       // Project title
-    category: 'Web Development', // 'Web Development', 'E-commerce', 'Corporate', or 'Portfolio'
-    year: 2024,                  // Year
-    client: 'Client Name',       // Client name
-    duration: 'Website',         // Project type (Website, Web App, Platform, etc.)
-    thumbnail: 'https://images.unsplash.com/photo-xxxxxxxxx',  // Project-related Unsplash image
-    projectUrl: 'https://example.com/project-url',             // Live project URL
-    description: 'Description of the web development project and its features.',
+    id: '5',
+    title: 'Pinehurst Resort',
+    category: 'Web Development',
+    year: 2023,
+    client: 'Pinehurst Resort & Country Club',
+    duration: 'Website',
+    thumbnail: 'https://i.imgur.com/3bXiQ9a.jpeg',
+    projectUrl: 'https://example.com/pinehurst',
+    description: 'A comprehensive resort website showcasing nine championship golf courses. Features elegant design, detailed course information, accommodation options, and seamless reservation systems for the ultimate golf destination.',
     credits: {
       developer: 'Kraig Hamrick',
-      designer: 'Design Team (optional)',
-      photographer: 'Photography Team (optional)',
-      agency: 'Agency Name (optional)'
+      photographer: 'Resort Photography Studio'
+    }
+  },
+  {
+    id: '6',
+    title: 'Fairway Atlas',
+    category: 'Web Development',
+    year: 2024,
+    client: 'Golf Community',
+    duration: 'Platform',
+    thumbnail: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=800&h=600&fit=crop',
+    projectUrl: 'https://preview-real-estate-home-page-kzmjztzq5q0bqbi1ieem.vusercontent.net/',
+    description: 'A comprehensive golf course discovery and mapping platform. Features interactive course directories, detailed course information, user reviews, and advanced search functionality for golf enthusiasts worldwide.',
+    credits: {
+      developer: 'Kraig Hamrick',
+      designer: 'Kraig Hamrick'
+    }
+  },
+  {
+    id: '7',
+    title: 'TPC Sawgrass',
+    category: 'Web Development',
+    year: 2022,
+    client: 'TPC Network',
+    duration: 'Website',
+    thumbnail: 'https://plus.unsplash.com/premium_photo-1712767020985-a7f5a5e6581c?q=80&w=800&h=600&fit=crop',
+    projectUrl: 'https://example.com/tpc-sawgrass',
+    description: 'A dynamic website for the iconic TPC Sawgrass, home of THE PLAYERS Championship. Features interactive course tours, tournament information, and premium membership details with sophisticated user experience design.',
+    credits: {
+      director: 'Kraig Hamrick',
+      editor: 'Kraig Hamrick'
     }
   }
-  */
-]
+  ,
+  {
+    id: '8',
+    title: 'Financial Dashboard (Dark)',
+    category: 'Web Development',
+    year: 2025,
+    client: 'Internal Project',
+    duration: 'Web App',
+    thumbnail: 'https://images.unsplash.com/photo-1551281044-8d8d58849f56?q=80&w=1200&h=800&fit=crop',
+    projectUrl: '#',
+    description: 'A responsive, dark-themed financial analytics dashboard featuring KPI tiles, charts, tables, and filters. Built as a reusable React component ready for integration and future data binding.',
+    credits: {
+      developer: 'Kraig Hamrick',
+      designer: 'Kraig Hamrick'
+    }
+  }
 
-/**
- * Function to return works sorted by year (newest first)
- */
 export const getWorksSortedByYear = () => {
   return [...works].sort((a, b) => b.year - a.year)
 }
