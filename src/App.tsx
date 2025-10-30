@@ -138,7 +138,11 @@ export default function App() {
           
           {currentView === 'works' && (
             <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
-              <WorksPage onBack={handleBackToHome} />
+              <WorksPage 
+                onBack={handleBackToHome}
+                works={works}
+                onWorkClick={handleWorkClick}
+              />
             </Suspense>
           )}
           

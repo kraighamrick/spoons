@@ -1,15 +1,25 @@
 import React from 'react'
 import { Button } from './ui/button'
 import { ArrowLeft } from 'lucide-react'
+import { Work } from '../data/works'
+import { ImageWithFallback } from './figma/ImageWithFallback'
 
 interface WorksPageProps {
   onBack: () => void
+  works?: Work[]
+  onWorkClick?: (work: Work) => void
 }
 
-export function WorksPage({ onBack }: WorksPageProps) {
+export function WorksPage({ onBack, works = [], onWorkClick }: WorksPageProps) {
+  const handleWorkClick = (work: Work) => {
+    if (onWorkClick) {
+      onWorkClick(work)
+    }
+  }
+
   return (
     <div className="pt-24 pb-20 px-6 min-h-screen">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <Button
           variant="ghost"
           onClick={onBack}
@@ -19,61 +29,77 @@ export function WorksPage({ onBack }: WorksPageProps) {
           Back to Home
         </Button>
         
-        <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
-          {/* Placeholder Content */}
-          <div className="w-full max-w-3xl">
-            <h1 className="text-5xl mb-6">Works</h1>
-            <p className="text-xl text-white/70 mb-12">
-              A comprehensive showcase of digital projects and creative solutions
-            </p>
-            
-            {/* Placeholder for Framer content */}
-            <div className="bg-white/5 rounded-lg p-12 border border-white/10 mb-8">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <div className="w-8 h-8 bg-white/20 rounded"></div>
+        <div className="flex flex-col items-center text-center mb-16">
+          <h1 className="text-5xl mb-6">Works</h1>
+          <p className="text-xl text-white/70 max-w-2xl">
+            A comprehensive showcase of digital projects and creative solutions
+          </p>
+        </div>
+        
+        {/* Quad Box Layout */}
+        <div className="grid grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {works.map((work, index) => (
+            <div
+              key={work.id}
+              onClick={() => handleWorkClick(work)}
+              className="group cursor-pointer transform transition-all duration-300 hover:scale-105"
+            >
+              <div className="bg-white/5 rounded-3xl p-6 border border-white/10 hover:border-white/20 hover:bg-white/10 transition-all duration-300 h-full">
+                {/* Thumbnail */}
+                <div className="relative mb-6 overflow-hidden rounded-2xl bg-white/5">
+                  <ImageWithFallback
+                    src={work.thumbnail}
+                    alt={work.title}
+                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
-                <h2 className="text-2xl mb-4">Framer Page Coming Soon</h2>
-                <p className="text-white/60 mb-6">
-                  This page will be replaced with your custom Framer design
-                </p>
-                <div className="text-sm text-white/40">
-                  Placeholder content - Replace with Framer embed
+                
+                {/* Content */}
+                <div className="text-left">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs text-white/60 font-medium uppercase tracking-wide">
+                      {work.category}
+                    </span>
+                    <span className="text-xs text-white/40">
+                      {work.year}
+                    </span>
+                  </div>
+                  
+                  <h3 className="text-xl font-semibold mb-2 group-hover:text-white transition-colors duration-300">
+                    {work.title}
+                  </h3>
+                  
+                  {work.client && (
+                    <p className="text-sm text-white/60 mb-3">
+                      {work.client}
+                    </p>
+                  )}
+                  
+                  <p className="text-sm text-white/70 leading-relaxed">
+                    {work.description.length > 120 
+                      ? `${work.description.substring(0, 120)}...` 
+                      : work.description
+                    }
+                  </p>
                 </div>
               </div>
             </div>
-            
-            {/* Additional placeholder sections */}
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
-              <div className="bg-white/5 rounded-lg p-6 border border-white/10">
-                <h3 className="text-lg mb-4">Project Gallery</h3>
-                <p className="text-white/60 text-sm">
-                  Interactive showcase of selected works with detailed case studies and project insights.
-                </p>
-              </div>
-              
-              <div className="bg-white/5 rounded-lg p-6 border border-white/10">
-                <h3 className="text-lg mb-4">Featured Work</h3>
-                <p className="text-white/60 text-sm">
-                  Highlighted projects demonstrating technical expertise and creative problem-solving.
-                </p>
-              </div>
-            </div>
-            
-            {/* Call to action */}
-            <div className="text-center">
-              <p className="text-white/60 mb-4">
-                Ready to see the full experience?
-              </p>
-              <Button
-                variant="outline"
-                onClick={onBack}
-                className="border-white/20 text-white hover:bg-white/10"
-              >
-                Return to Home
-              </Button>
-            </div>
-          </div>
+          ))}
+        </div>
+        
+        {/* Call to action */}
+        <div className="text-center mt-16">
+          <p className="text-white/60 mb-4">
+            Ready to explore more?
+          </p>
+          <Button
+            variant="outline"
+            onClick={onBack}
+            className="border-white/20 text-white hover:bg-white/10"
+          >
+            Return to Home
+          </Button>
         </div>
       </div>
     </div>
